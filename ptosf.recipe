@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+
+from collections import OrderedDict
+from calibre.web.feeds.news import BasicNewsRecipe
+from calibre.ebooks.BeautifulSoup import Tag, NavigableString
+
+class PeriodicTableOfScienceFiction(BasicNewsRecipe):
+	
+	# Fill in the missing details yourself. It's a scavenger hunt.
+	INDEX = ''
+	title = 'Periodic Table of Science Fiction'
+	story_author = 'Michael Swanwick'
+	description = ''
+	language = 'en'
+	max_articles_per_feed = 120
+	no_stylesheets = True
+	remove_tags = [	{'name': 'img', 'attrs': {}} ]
+	keep_only_tags = [ {'name': 'div', 'attrs': {'class': 'post-body entry-content'}} ]
+	
+	def parse_index(self):
+		
+		s = OrderedDict()
+		s['Stories'] = []
+		
+		# List of direct links to each story, with title, formatted as follows:
+		# the_stories = [ [URL1, TITLE1], [URL2, TITLE2], ... [URLN, TITLEN] ]
+		the_stories = []
+		
+		for story_url, story_title in the_stories:
+			s['Stories'].append({'title': story_title, 'author': story_author, 'url': story_url, 'description': '', 'date': ''})
+		
+		return s.items()
